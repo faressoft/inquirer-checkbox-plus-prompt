@@ -1,9 +1,9 @@
 # Inquirer Checkbox Plus Prompt
 
+A plugin for [Inquirer](https://github.com/SBoudrias/Inquirer.js), similar to the original checkbox with extra features.
+
 [![npm](https://img.shields.io/npm/v/inquirer-checkbox-plus-prompt.svg)](https://www.npmjs.com/package/inquirer-checkbox-plus-prompt)
 [![npm](https://img.shields.io/npm/l/inquirer-checkbox-plus-prompt.svg)](https://github.com/faressoft/inquirer-checkbox-plus-prompt/blob/master/LICENSE)
-
-A plugin for [Inquirer](https://github.com/SBoudrias/Inquirer.js), similar to the original checkbox with extra features.
 
 ![Demo](/demo.gif?raw=true)
 
@@ -17,7 +17,7 @@ npm install -g inquirer-checkbox-plus-prompt
 
 You can name it with any name other than `checkbox-plus`, just change the string `'checkbox-plus'` to anything else.
 
-```
+```js
 inquirer.registerPrompt('checkbox-plus', require('inquirer-checkbox-plus-prompt'));
 
 inquirer.prompt({
@@ -40,7 +40,7 @@ The extra options that this plugin provides are:
 
 Check [example.js](/example.js?raw=true) for a more advanced example.
 
-```
+```js
 var inquirer = require('inquirer');
 var fuzzy = require('fuzzy');
 
