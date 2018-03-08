@@ -1,0 +1,39 @@
+{
+  "name": "inquirer-checkbox-plus-prompt",
+  "version": "1.0.0",
+  "description": "Checkbox with autocomplete and other additions for Inquirer",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/faressoft/inquirer-checkbox-plus-prompt.git"
+  },
+  "keywords": [
+    "inquirer",
+    "checkbox",
+    "autocomplete",
+    "search",
+    "filter",
+    "searchable",
+    "highlight",
+    "source",
+    "api",
+    "promise",
+    "command",
+    "prompt",
+    "stdin",
+    "cli",
+    "tty",
+    "menu"
+  ],
+  "author": "Mohammad Fares <faressoft.com@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cli-cursor": "^2.1.0",
+    "figures": "^2.0.0",
+    "inquirer": "^5.1.0",
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "fuzzy": "^0.1.3"
+  }
+}
