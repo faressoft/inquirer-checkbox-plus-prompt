@@ -367,6 +367,11 @@ class CheckboxPlusPrompt extends Base {
    */
   onSpaceKey() {
 
+    // When called no results
+    if (!this.choices.getChoice(this.pointer)) {
+      return;
+    }
+
     this.toggleChoice(this.choices.getChoice(this.pointer));
     this.render();
 
