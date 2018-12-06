@@ -150,6 +150,8 @@ class CheckboxPlusPrompt extends Base {
 
     sourcePromise.then(function(choices) {
       
+      self.checkedChoices = [];
+
       // Is not the last issued promise
       if (self.lastSourcePromise !== sourcePromise) {
         return;
@@ -317,6 +319,9 @@ class CheckboxPlusPrompt extends Base {
    */
   getCurrentValue() {
 
+    this.checkedChoices = this.checkedChoices.filter(function(choice) {
+      return Boolean(choice.checked) && !choice.disabled;
+    })
     this.selection = _.map(this.checkedChoices, 'short');
     return _.map(this.checkedChoices, 'value');
 
@@ -383,6 +388,8 @@ class CheckboxPlusPrompt extends Base {
    */
   onAllKey() {
 
+    var self = this;
+    
     var shouldBeChecked = Boolean(
       this.choices.find(function(choice) {
         return choice.type !== 'separator' && !choice.checked;
@@ -391,7 +398,7 @@ class CheckboxPlusPrompt extends Base {
 
     this.choices.forEach(function(choice) {
       if (choice.type !== 'separator') {
-        choice.checked = shouldBeChecked;
+        self.toggleChoice(choice, shouldBeChecked);
       }
     });
 
@@ -405,9 +412,11 @@ class CheckboxPlusPrompt extends Base {
    */
   onInverseKey() {
 
+    var self = this;
+
     this.choices.forEach(function(choice) {
       if (choice.type !== 'separator') {
-        choice.checked = !choice.checked;
+        self.toggleChoice(choice, !choice.checked);
       }
     });
 
