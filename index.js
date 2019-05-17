@@ -210,9 +210,12 @@ class CheckboxPlusPrompt extends Base {
     // Answered
     if (this.status === 'answered') {
 
-      message += chalk.cyan(this.selection.join(', '));
+      message += chalk.cyan(' ' + this.selection.join(', '));
       return this.screen.render(message, bottomContent);
 
+      // Show selected values
+    } else {
+      message += chalk.gray('[' + _.chain(this.getCurrentValue()).sortBy().join(', ').value() + '] ');
     }
 
     // No search query is entered before
