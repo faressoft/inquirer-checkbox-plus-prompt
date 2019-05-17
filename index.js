@@ -41,6 +41,11 @@ class CheckboxPlusPrompt extends Base {
       this.opt.searchable = false;
     }
 
+    // Default value for the showStatus option
+    if (typeof this.opt.showStatus == 'undefined') {
+      this.opt.showStatus = false;
+    }
+
     // Default value for the default option
     if (typeof this.opt.default == 'undefined') {
       this.opt.default = null;
@@ -214,7 +219,7 @@ class CheckboxPlusPrompt extends Base {
       return this.screen.render(message, bottomContent);
 
       // Show selected values
-    } else {
+    } else if (this.opt.showStatus) {
       message += chalk.gray(
         '[' +
         _.chain(this.checkedChoices)
