@@ -215,7 +215,7 @@ class CheckboxPlusPrompt extends Base {
 
       // Show selected values
     } else {
-      message += chalk.gray('[' + _.chain(this.getCurrentValue()).sortBy().join(', ').value() + '] ');
+      message += chalk.gray('[' + _.chain(this.getCurrentValue()).join(', ').value() + '] ');
     }
 
     // No search query is entered before
@@ -445,20 +445,15 @@ class CheckboxPlusPrompt extends Base {
     // Remove the choice's value from the checked values
     _.remove(this.value, _.isEqual.bind(null, choice.value));
 
-    // Remove the checkedChoices with the value of the current choice
-    _.remove(this.checkedChoices, function(checkedChoice) {
-      return _.isEqual(choice.value, checkedChoice.value);
-    });
-
     choice.checked = false;
 
     // Is the choice checked
     if (checked) {
       this.value.push(choice.value);
-      this.checkedChoices.push(choice);
       choice.checked = true;
     }
 
+    this.checkedChoices = _.filter(this.choices.realChoices, (choice) => choice.checked);
   }
 
   /**
