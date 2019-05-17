@@ -215,7 +215,14 @@ class CheckboxPlusPrompt extends Base {
 
       // Show selected values
     } else {
-      message += chalk.gray('[' + _.chain(this.getCurrentValue()).join(', ').value() + '] ');
+      message += chalk.gray(
+        '[' +
+        _.chain(this.checkedChoices)
+          .map((choice) => _.isObject(choice) ? choice.short || choice.name : choice)
+          .join(', ')
+          .value() +
+        '] '
+      );
     }
 
     // No search query is entered before
