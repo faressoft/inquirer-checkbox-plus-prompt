@@ -524,7 +524,7 @@ class CheckboxPlusPrompt extends Base {
       // Is the current choice is the selected choice
       if (index - separatorOffset === pointer) {
 
-        output += chalk.cyan(figures.play);
+        output += chalk.cyan(figures.pointer);
         output += self.getCheckboxFigure(choice.checked) + ' ';
         output += self.opt.highlight ? chalk.gray(choice.name) : choice.name;
 
