@@ -31,7 +31,8 @@
     "cli-cursor": "^3.1.0",
     "figures": "^3.0.0",
     "inquirer": "^7.3.3",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "rxjs": "^6.6.7"
   },
   "devDependencies": {
     "fuzzy": "^0.1.3"
