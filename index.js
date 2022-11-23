@@ -481,7 +481,7 @@ class CheckboxPlusPrompt extends Base {
    */
   getCheckboxFigure(checked) {
 
-    return checked ? chalk.green(figures.checkboxOn) : figures.checkboxOff;
+    return checked ? chalk.green(figures.radioOn) : figures.radioOff;
 
   }
 
