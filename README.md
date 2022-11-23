@@ -5,7 +5,11 @@ A plugin for [Inquirer](https://github.com/SBoudrias/Inquirer.js), similar to th
 [![npm](https://img.shields.io/npm/v/inquirer-checkbox-plus-prompt.svg)](https://www.npmjs.com/package/inquirer-checkbox-plus-prompt)
 [![npm](https://img.shields.io/npm/l/inquirer-checkbox-plus-prompt.svg)](https://github.com/faressoft/inquirer-checkbox-plus-prompt/blob/master/LICENSE)
 
-![Demo](/demo.gif?raw=true)
+<p align="center">
+  <img width="500" src="/demo.gif?raw=true">
+  <br>
+  <span>The animated GIF is made by <a href="https://github.com/faressoft/terminalizer">Terminalizer</a></span>
+</p>
 
 # Installation
 
