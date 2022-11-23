@@ -1,6 +1,6 @@
 {
   "name": "inquirer-checkbox-plus-prompt",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Checkbox with autocomplete and other additions for Inquirer",
   "main": "index.js",
   "repository": {
