@@ -1,13 +1,14 @@
 /**
  * Checkbox Plus
- * 
+ *
  * @author Mohammad Fares <faressoft.com@gmail.com>
  */
- 
+
 'use strict';
 
 var _ = require('lodash');
 var chalk = require('chalk');
+var { map, takeUntil } = require('rxjs/operators');
 var cliCursor = require('cli-cursor');
 var figures = require('figures');
 var Base = require('inquirer/lib/prompts/base');
@@ -22,7 +23,7 @@ class CheckboxPlusPrompt extends Base {
 
   /**
    * Initialize the prompt
-   * 
+   *
    * @param  {Object} questions
    * @param  {Object} rl
    * @param  {Object} answers
@@ -69,7 +70,7 @@ class CheckboxPlusPrompt extends Base {
 
   /**
    * Start the Inquiry session
-   * 
+   *
    * @param  {Function} callback callback when prompt is done
    * @return {this}
    */
@@ -84,27 +85,41 @@ class CheckboxPlusPrompt extends Base {
       var events = observe(self.rl);
 
       var validation = self.handleSubmitEvents(
-        events.line.map(self.getCurrentValue.bind(self))
+        events.line.pipe(map(self.getCurrentValue.bind(self)))
       );
-
       validation.success.forEach(self.onEnd.bind(self));
       validation.error.forEach(self.onError.bind(self));
 
-      events.normalizedUpKey.takeUntil(validation.success).forEach(self.onUpKey.bind(self));
-      events.normalizedDownKey.takeUntil(validation.success).forEach(self.onDownKey.bind(self));
-      events.spaceKey.takeUntil(validation.success).forEach(self.onSpaceKey.bind(self));
+      events.normalizedUpKey
+        .pipe(takeUntil(validation.success))
+        .forEach(self.onUpKey.bind(self));
+      events.normalizedDownKey
+        .pipe(takeUntil(validation.success))
+        .forEach(self.onDownKey.bind(self));
+      events.keypress
+        .pipe(takeUntil(validation.success))
+        .forEach(self.onKeypress.bind(self));
+      events.spaceKey
+        .pipe(takeUntil(validation.success))
+        .forEach(self.onSpaceKey.bind(self));
 
       // If the search is enabled
       if (!self.opt.searchable) {
 
-        events.numberKey.takeUntil(validation.success).forEach(self.onNumberKey.bind(self));
-        events.aKey.takeUntil(validation.success).forEach(self.onAllKey.bind(self));
-        events.iKey.takeUntil(validation.success).forEach(self.onInverseKey.bind(self));
+        events.numberKey
+          .pipe(takeUntil(validation.success))
+          .forEach(self.onNumberKey.bind(self));
+        events.aKey
+          .pipe(takeUntil(validation.success))
+          .forEach(self.onAllKey.bind(self));
+        events.iKey
+          .pipe(takeUntil(validation.success))
+          .forEach(self.onInverseKey.bind(self));
 
       } else {
-
-        events.keypress.takeUntil(validation.success).forEach(self.onKeypress.bind(self));
-
+        events.keypress
+          .pipe(takeUntil(validation.success))
+          .forEach(self.onKeypress.bind(self));
       }
 
       if (self.rl.line) {
@@ -116,7 +131,7 @@ class CheckboxPlusPrompt extends Base {
       self.render();
 
     });
-    
+
     return this;
 
   }
@@ -149,7 +164,7 @@ class CheckboxPlusPrompt extends Base {
     this.searching = true;
 
     sourcePromise.then(function(choices) {
-      
+
       // Is not the last issued promise
       if (self.lastSourcePromise !== sourcePromise) {
         return;
@@ -198,7 +213,7 @@ class CheckboxPlusPrompt extends Base {
 
   /**
    * Render the prompt
-   * 
+   *
    * @param  {Object} error
    */
   render(error) {
@@ -226,7 +241,7 @@ class CheckboxPlusPrompt extends Base {
           chalk.cyan.bold('<space>') +
           ' to select, ' +
           'or type anything to filter the list)';
-        
+
       } else {
 
         message +=
@@ -237,7 +252,7 @@ class CheckboxPlusPrompt extends Base {
           ' to toggle all, ' +
           chalk.cyan.bold('<i>') +
           ' to invert selection)';
-        
+
       }
 
     }
@@ -284,7 +299,7 @@ class CheckboxPlusPrompt extends Base {
   /**
    * A callback function for the event:
    * When the user press `Enter` key
-   * 
+   *
    * @param {Object} state
    */
   onEnd(state) {
@@ -303,7 +318,7 @@ class CheckboxPlusPrompt extends Base {
   /**
    * A callback function for the event:
    * When something wrong happen
-   * 
+   *
    * @param {Object} state
    */
   onError(state) {
@@ -312,7 +327,7 @@ class CheckboxPlusPrompt extends Base {
 
   /**
    * Get the current values of the selected choices
-   * 
+   *
    * @return {Array}
    */
   getCurrentValue() {
@@ -460,19 +475,19 @@ class CheckboxPlusPrompt extends Base {
 
   /**
    * Get the checkbox figure (sign)
-   * 
+   *
    * @param  {Boolean} checked
    * @return {String}
    */
   getCheckboxFigure(checked) {
 
-    return checked ? chalk.green(figures.radioOn) : figures.radioOff;
+    return checked ? chalk.green(figures.checkboxOn) : figures.checkboxOff;
 
   }
 
   /**
    * Render the checkbox choices
-   * 
+   *
    * @param  {Array}  choices
    * @param  {Number} pointer the position of the pointer
    * @return {String} rendered content
