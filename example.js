@@ -14,7 +14,7 @@ var colors = [
   {name: 'The blue color', value: 'blue', short: 'blue', disabled: true},
   {name: 'The green color', value: 'green', short: 'green', disabled: false},
   {name: 'The yellow color', value: 'yellow', short: 'yellow', disabled: false},
-  {name: 'The black color', value: {name: 'black'}, short: 'black', disabled: false}
+  {name: 'The black color', value: 'black', short: 'black', disabled: false}
 ];
 
 inquirer.prompt([{
