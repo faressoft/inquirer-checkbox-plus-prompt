@@ -39,6 +39,7 @@ The extra options that this plugin provides are:
 * **source**: (Function) a method that called to return a promise that should be resolved with a list of choices in a similar format as the `choices` option in the original `checkbox` prompt of `Inquirer`.
 * **highlight**: (Boolean) if `true`, the current selected choice gets highlighted. Default: `false`.
 * **searchable**: (Boolean) if `true`, allow the user to filter the list. The `source` function gets called everytime the search query is changed. Default: `false`.
+* **showStatus**: (Boolean) if `true`, the current selected choices are shown just after the question.
 
 # Example
 
@@ -59,6 +60,7 @@ inquirer.prompt([{
   pageSize: 10,
   highlight: true,
   searchable: true,
+  showStatus: true,
   default: ['yellow', 'red'],
   source: function(answersSoFar, input) {
 

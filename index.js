@@ -42,6 +42,11 @@ class CheckboxPlusPrompt extends Base {
       this.opt.searchable = false;
     }
 
+    // Default value for the showStatus option
+    if (typeof this.opt.showStatus == 'undefined') {
+      this.opt.showStatus = false;
+    }
+
     // Default value for the default option
     if (typeof this.opt.default == 'undefined') {
       this.opt.default = null;
@@ -225,9 +230,19 @@ class CheckboxPlusPrompt extends Base {
     // Answered
     if (this.status === 'answered') {
 
-      message += chalk.cyan(this.selection.join(', '));
+      message += chalk.cyan(' ' + this.selection.join(', '));
       return this.screen.render(message, bottomContent);
 
+      // Show selected values
+    } else if (this.opt.showStatus) {
+      message += chalk.gray(
+        '[' +
+        _.chain(this.checkedChoices)
+          .map((choice) => _.isObject(choice) ? choice.short || choice.name : choice)
+          .join(', ')
+          .value() +
+        '] '
+      );
     }
 
     // No search query is entered before
@@ -457,20 +472,15 @@ class CheckboxPlusPrompt extends Base {
     // Remove the choice's value from the checked values
     _.remove(this.value, _.isEqual.bind(null, choice.value));
 
-    // Remove the checkedChoices with the value of the current choice
-    _.remove(this.checkedChoices, function(checkedChoice) {
-      return _.isEqual(choice.value, checkedChoice.value);
-    });
-
     choice.checked = false;
 
     // Is the choice checked
     if (checked) {
       this.value.push(choice.value);
-      this.checkedChoices.push(choice);
       choice.checked = true;
     }
 
+    this.checkedChoices = _.filter(this.choices.realChoices, (choice) => choice.checked);
   }
 
   /**
