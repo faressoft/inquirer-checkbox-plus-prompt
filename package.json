@@ -1,6 +1,13 @@
 {
   "name": "inquirer-checkbox-plus-prompt",
-  "version": "1.4.2",
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "import": "./index.mjs",
+      "default": "./index.js"
+    }
+  },
+  "version": "1.5.0",
   "description": "Checkbox with autocomplete and other additions for Inquirer",
   "main": "index.js",
   "repository": {
