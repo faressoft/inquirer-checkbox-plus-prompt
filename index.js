@@ -37,6 +37,11 @@ class CheckboxPlusPrompt extends Base {
       this.opt.highlight = false;
     }
 
+    // Default value for the highlightStyle option
+    if (typeof this.opt.highlightStyle == 'undefined') {
+      this.opt.highlightStyle = 'gray';
+    }
+
     // Default value for the searchable option
     if (typeof this.opt.searchable == 'undefined') {
       this.opt.searchable = false;
@@ -486,6 +491,29 @@ class CheckboxPlusPrompt extends Base {
   }
 
   /**
+   * Get the highlight style
+   *
+   * @return {Function}
+   */
+  getHighlightStyle() {
+
+    var style = this.opt.highlightStyle;
+
+    // A chalk style name (e.g. 'gray', 'yellow', 'bold', ...)
+    if (typeof style === 'string' && typeof chalk[style] === 'function') {
+      return chalk[style];
+    }
+
+    // A custom style function
+    if (typeof style === 'function') {
+      return style;
+    }
+
+    // Default
+    return chalk.gray;
+  }
+
+  /**
    * Render the checkbox choices
    *
    * @param  {Array}  choices
@@ -526,7 +554,7 @@ class CheckboxPlusPrompt extends Base {
 
         output += chalk.cyan(figures.pointer);
         output += self.getCheckboxFigure(choice.checked) + ' ';
-        output += self.opt.highlight ? chalk.gray(choice.name) : choice.name;
+        output += self.opt.highlight ? self.getHighlightStyle()(choice.name) : choice.name;
 
       } else {
 

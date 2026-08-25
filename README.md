@@ -32,12 +32,13 @@ inquirer.prompt({
 
 # Options
 
-Takes `type`, `name`, `message`, `source`[, `filter`, `validate`, `default`, `pageSize`, `highlight`, `searchable`] properties.
+Takes `type`, `name`, `message`, `source`[, `filter`, `validate`, `default`, `pageSize`, `highlight`, `highlightStyle`, `searchable`] properties.
 
 The extra options that this plugin provides are:
 
 * **source**: (Function) a method that called to return a promise that should be resolved with a list of choices in a similar format as the `choices` option in the original `checkbox` prompt of `Inquirer`.
 * **highlight**: (Boolean) if `true`, the current selected choice gets highlighted. Default: `false`.
+* **highlightStyle**: (String) The style of the highlighted choice. It can be any [Chalk](https://github.com/chalk/chalk) style (e.g. `gray`, `yellow`, `bold`). Default: `gray`.
 * **searchable**: (Boolean) if `true`, allow the user to filter the list. The `source` function gets called everytime the search query is changed. Default: `false`.
 
 # Example
